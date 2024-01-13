@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>My Todo List</title>
+    <script th:src="@{/js/htmx.min.js}"></script>
+    <style>
+        :root {
+            --gutter: 0.5em;
+        }
+        :body {
+            padding: var(--gutter);
+        }
+        .line {
+            border-top: 1px solid black;
+            margin-top: var(--gutter);
+            padding-top: var(--gutter);
+        }
+        .title input[type=text] {
+            width: calc(100% - var(--gutter));
+        }
+        .todo {
+            grid-gap: var(--gutter);
+            display: grid;
+            grid: 'id title buttons';
+            grid-template-columns: 3vw auto 20vw;
+        }
+        .todo .buttons {
+            grid-area: buttons;
+        }
+        .todo .title {
+            grid-area: title;
+            text-align: left;
+        }
+        .todo .id {
+            grid-area: id;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo" th:each="todo : ${todos}">
+        <div class="id" th:text="${todo.id}">ID </div>
+        <div class="title" th:text="${todo.title}">Title </div>
+        <div class="buttons"> </div>
+    </div>
+</body>
+</html>
