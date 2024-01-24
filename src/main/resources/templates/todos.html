@@ -42,10 +42,40 @@
     </style>
 </head>
 <body>
-    <div class="todo" th:each="todo : ${todos}">
-        <div class="id" th:text="${todo.id}">ID </div>
-        <div class="title" th:text="${todo.title}">Title </div>
-        <div class="buttons"> </div>
+    <div th:fragment="todos-list" class="todos-list">
+        <div class="todo line" th:each="todo : ${todos}">
+            <div class="id" th:text="${todo.id}">ID </div>
+            <div class="title" th:text="${todo.title}">Title </div>
+            <div class="buttons">
+                <button th:attr="hx-delete=@{/todos/{id}(id=${todo.id})}"
+                        th:text="Delete "
+                        hx-swap="outerHTML"
+                        hx-target="closest .todo"
+                        hx-confirm="Are you sure"
+                />
+            </div>
+        </div>
+    </div>
+    <div th:fragment="todos-form" id="todos-form" hx-swap-oob="true">
+        <div class="line todo">
+            <div></div>
+            <div class="title">
+                <input type="text" name="new-todo" id="new-todo" />
+            </div>
+            <div class="button">
+                <button th:text="Add"
+                        hx-post="/todos"
+                        hx-include="#new-todo"
+                        hx-target=".todos-list"
+                />
+            </div>
+        </div>
+    </div>
+    <div class="line">
+        <button th:text="Reset"
+                hx-post="/todos/reset"
+                hx-target=".todos-list"
+        />
     </div>
 </body>
 </html>

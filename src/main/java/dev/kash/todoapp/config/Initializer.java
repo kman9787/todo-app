@@ -17,7 +17,7 @@ public class Initializer {
         this.todoRepository = todoRepository;
     }
 
-    @EventListener(ApplicationReadyEvent.class)
+    @EventListener({ApplicationReadyEvent.class, TodoResetEvent.class})
     public void reset(){
         this.todoRepository.deleteAll();
         Stream.of(
