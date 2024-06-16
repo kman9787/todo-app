@@ -1,8 +1,9 @@
 package dev.kash.todoapp.repository;
 
-import dev.kash.todoapp.model.Todo;
-import org.springframework.data.repository.ListCrudRepository;
+import dev.kash.todoapp.domain.Todo;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface TodoRepository extends ListCrudRepository<Todo, Integer> {
-
+@Repository
+public interface TodoRepository extends JpaRepository<Todo, Long> {
 }
