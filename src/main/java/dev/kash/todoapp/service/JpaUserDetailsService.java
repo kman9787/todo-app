@@ -1,6 +1,5 @@
 package dev.kash.todoapp.service;
 
-import dev.kash.todoapp.domain.User;
 import dev.kash.todoapp.model.SecurityUserDetails;
 import dev.kash.todoapp.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
