@@ -32,7 +32,10 @@
                         </div>
                     </form>
                     <br/>
-                    <p th:if="${param.error}" class="card-text text-danger">Incorrect username or password.</p>
+                    <span th:if="${error}">
+                        <p class="card-text text-danger" th:text="${msg}">Incorrect username or password.</p>
+                    </span>
+
                 </div>
             </div>
         </div>

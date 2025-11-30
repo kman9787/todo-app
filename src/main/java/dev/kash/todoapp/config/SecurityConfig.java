@@ -32,10 +32,16 @@ public class SecurityConfig {
                         .requestMatchers("/js/**").permitAll()
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/login").permitAll()
+                        .requestMatchers("/login_failure").permitAll()
+                        .requestMatchers("/logout").permitAll()
                         .anyRequest().authenticated())
                 .userDetailsService(jpaUserDetailsService)
-                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
-                .formLogin(formLogin -> formLogin.loginPage("/login").defaultSuccessUrl("/home"))
+                .headers(headers -> headers
+                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/home")
+                        .failureForwardUrl("/login_failure"))
                 .logout(logout -> logout.logoutUrl("/logout")
                         .deleteCookies("JSESSIONID")
                         .invalidateHttpSession(true)

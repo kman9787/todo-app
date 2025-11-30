@@ -4,6 +4,7 @@ import dev.kash.todoapp.domain.Todo;
 import dev.kash.todoapp.model.TodoJson;
 import dev.kash.todoapp.model.TodoJsonMapper;
 import dev.kash.todoapp.service.TodoService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +14,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/todo")
+@RequiredArgsConstructor
 public class TodoRestController {
 
     private final TodoService todoService;
-
-    public TodoRestController(TodoService todoService) {
-        this.todoService = todoService;
-    }
 
     @PostMapping("/save")
     public TodoJson saveTodo(@RequestParam String title, @RequestParam String desc){
