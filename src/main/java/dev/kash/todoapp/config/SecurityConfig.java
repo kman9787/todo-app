@@ -40,6 +40,7 @@ public class SecurityConfig {
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
+                        .successForwardUrl("/home")
                         .defaultSuccessUrl("/home")
                         .failureForwardUrl("/login_failure"))
                 .logout(logout -> logout.logoutUrl("/logout")

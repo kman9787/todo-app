@@ -19,7 +19,7 @@ public class TodoController {
 
     private final TodoService todoService;
     
-    @GetMapping("/home")
+    @RequestMapping("/home")
     public String home(Model model){
         todoService.triggerEvent(new TodoResetEvent(this));
         return "home";
