@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS `todo` (
+
+    `id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `created_datetime` TIMESTAMP,
+    `desc` VARCHAR(255),
+    `title` VARCHAR(255),
+    `updated_datetime` TIMESTAMP
+
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8;

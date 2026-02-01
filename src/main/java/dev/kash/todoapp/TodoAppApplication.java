@@ -16,7 +16,7 @@ public class TodoAppApplication {
 		SpringApplication.run(TodoAppApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	CommandLineRunner commandLineRunner(@Autowired UserRepository userRepository,
 										@Autowired PasswordEncoder passwordEncoder){
 		return args -> {
@@ -31,5 +31,5 @@ public class TodoAppApplication {
 				userRepository.save(new User("user", passString, "USER"));
 			}
 		};
-	}
+	}*/
 }
