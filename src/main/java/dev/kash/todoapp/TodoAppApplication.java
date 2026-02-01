@@ -24,11 +24,11 @@ public class TodoAppApplication {
 			String passString = passwordEncoder.encode("password");
 
 			if(userRepository.findByUserName("admin").isEmpty()) {
-				userRepository.save(new User("admin", passString, "ROLE_ADMIN,ROLE_USER"));
+				userRepository.save(new User("admin", passString, "ADMIN,USER"));
 			}
 
 			if(userRepository.findByUserName("user").isEmpty()) {
-				userRepository.save(new User("user", passString, "ROLE_USER"));
+				userRepository.save(new User("user", passString, "USER"));
 			}
 		};
 	}
