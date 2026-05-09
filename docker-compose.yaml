@@ -1,0 +1,14 @@
+services:
+  web-app:
+    image: kash-todo-app:latest
+    container_name: kash-todo-app
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    secrets:
+      - db_password
+
+secrets:
+  db_password:
+    file: ./db_pass.txt
