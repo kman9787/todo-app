@@ -1,0 +1,3 @@
+export SPRING_DATASOURCE_URL=jdbc:mysql://kashdebian:13306/appdbdev
+export SPRING_DATASOURCE_USERNAME=appdbdev
+export SPRING_DATASOURCE_PASSWORD=appdbdev

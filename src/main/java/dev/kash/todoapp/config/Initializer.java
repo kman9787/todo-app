@@ -21,7 +21,7 @@ public class Initializer {
     @EventListener(ApplicationReadyEvent.class)
     public void init(){
 
-        log.info("Initializing....");
+        log.info("Application ready....");
     }
 
     @EventListener(TodoResetEvent.class)
