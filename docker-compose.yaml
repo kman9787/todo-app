@@ -22,6 +22,9 @@ services:
     image: flyway/flyway
     container_name: flyway-migration
     command: -configFiles=/run/secrets/flyway_config migrate
+    environment:
+      - FLYWAY_URL=jdbc:mysql://mysqldb:3306/${MYSQL_DATABASE}?sslMode=PREFERRED&allowPublicKeyRetrieval=true
+      - FLYWAY_USER=root
     volumes:
       - ./database/flyway/migrations:/flyway/migrations
     networks:
