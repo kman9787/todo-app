@@ -17,8 +17,12 @@ services:
 
   flyway:
     image: flyway/flyway
-    container_name: flyway_migration
+    container_name: flyway-migration
     command: migrate -configFiles=/flyway/conf/flyway.toml
+    environment:
+      - FLYWAY_URL=jdbc:mysql://mysqldb:3306/${MYSQL_DATABASE}?sslMode=PREFERRED&allowPublicKeyRetrieval=true
+      - FLYWAY_USER=root
+      - FLYWAY_PASSWORD=${MYSQL_ROOT_PASSWORD}
     volumes:
       - ./database/flyway/migrations:/flyway/migrations
       - ./database/flyway/conf:/flyway/conf
@@ -31,9 +35,8 @@ services:
     image: ${IMAGE_NAME}:latest
     container_name: ${IMAGE_NAME}
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_SCHEMA}?${DATABASE_OPTIONS}
-      - SPRING_DATASOURCE_USERNAME=${DATABASE_USERNAME}
-      - SPRING_DATASOURCE_PASSWORD=${DATABASE_PASSWORD}
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/${MYSQL_DATABASE}?sslMode=PREFERRED&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=${MYSQL_USER}
     ports:
       - "8080:8080"
     networks:
@@ -53,4 +56,4 @@ networks:
 
 secrets:
   db_password:
-    file: ./db_pass.txt
+    file: ./db_psswd.txt
