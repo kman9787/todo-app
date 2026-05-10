@@ -32,8 +32,8 @@ services:
       - flyway_config
 
   webapp:
-    image: ${IMAGE_NAME}:latest
-    container_name: ${IMAGE_NAME}
+    image: ${IMAGE_NAME:-todo-app}:latest
+    container_name: ${IMAGE_NAME:-todo-app}
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/${MYSQL_DATABASE}?sslMode=PREFERRED&allowPublicKeyRetrieval=true
       - SPRING_DATASOURCE_USERNAME=${MYSQL_USER}
