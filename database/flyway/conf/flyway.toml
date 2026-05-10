@@ -1,0 +1,21 @@
+[environments.default]
+url = "jdbc:mysql://mysqldb:3306/appdbdev?sslMode=PREFERRED&allowPublicKeyRetrieval=true"
+user = "root"
+password = "appdbdev"
+connectRetries = 5
+
+[environments.dev]
+url = "jdbc:mysql://mysqldb:3306/appdbdev?sslMode=PREFERRED&allowPublicKeyRetrieval=true"
+user = "root"
+password = "appdbdev"
+connectRetries = 5
+
+[environments.prod]
+url = "jdbc:mysql://mysqldb:3306/dbprod?sslMode=PREFERRED&allowPublicKeyRetrieval=true"
+user = "root"
+password = ""
+connectRetries = 5
+
+[flyway]
+environment = "dev"
+locations = ["filesystem:/flyway/migrations"]
