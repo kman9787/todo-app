@@ -1,5 +1,0 @@
-[environments.default]
-connectRetries = 5
-
-[flyway]
-locations = ["filesystem:/flyway/migrations"]

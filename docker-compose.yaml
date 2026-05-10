@@ -5,8 +5,8 @@ services:
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PASSWORD_FILE=/run/secrets/db_password
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_root_password
     volumes:
       - db_data:/var/lib/mysql
     ports:
@@ -14,22 +14,22 @@ services:
     networks:
       - service-network
     restart: unless-stopped
+    secrets:
+      - db_password
+      - db_root_password
 
   flyway:
     image: flyway/flyway
     container_name: flyway-migration
-    command: migrate -configFiles=/flyway/conf/flyway.toml
-    environment:
-      - FLYWAY_URL=jdbc:mysql://mysqldb:3306/${MYSQL_DATABASE}?sslMode=PREFERRED&allowPublicKeyRetrieval=true
-      - FLYWAY_USER=root
-      - FLYWAY_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    command: -configFiles=/run/secrets/flyway_config migrate
     volumes:
       - ./database/flyway/migrations:/flyway/migrations
-      - ./database/flyway/conf:/flyway/conf
     networks:
       - service-network
     depends_on:
       - mysqldb
+    secrets:
+      - flyway_config
 
   webapp:
     image: ${IMAGE_NAME}:latest
@@ -56,4 +56,8 @@ networks:
 
 secrets:
   db_password:
-    file: ./db_psswd.txt
+    file: config/db_psswd.txt
+  db_root_password:
+    file: config/db_root_psswd.txt
+  flyway_config:
+    file: config/flyway.conf
